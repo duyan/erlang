@@ -1,7 +1,7 @@
 -module(eightqueenimprove).
 -export([start/0]).
 -define(N,8).
-dddddddddddddddddddddd
+
 start() ->
     [eightqueen(P,[],?N) || P <- lists:seq(1,?N)],
     init:stop().
