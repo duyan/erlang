@@ -2,8 +2,6 @@
 -export([start/0]).
 -define(N,8).
 
-1234567890
-
 start() ->
     [eightqueen(P,[],?N) || P <- lists:seq(1,?N)],
     init:stop().
