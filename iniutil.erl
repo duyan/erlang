@@ -1,5 +1,4 @@
 -module(iniutil).
--author(duyan).
 -compile(export_all).
 
 -record(ini,{filename, sections}).

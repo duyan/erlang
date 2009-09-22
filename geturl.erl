@@ -1,7 +1,7 @@
 -module(geturl).
 -compile(export_all).
 
--define(HEADER, "src=\"http://img.china.alibaba.com/").
+-define(HEADER, "src=\"http://images.ent.xunlei.com/").
 -define(EXT,    "jpg").
 
 geturl(A) ->
