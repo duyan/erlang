@@ -22,3 +22,24 @@ zipfunc_tr([H|T], AccIn, Index, Count) ->
     %%           [[H|lists:nth(Index,AccIn)]] ++ element(2,lists:split(Index, AccIn))]),
     zipfunc_tr(T, element(1,lists:split(Index-1,AccIn)) ++
                [[H|lists:nth(Index,AccIn)]] ++ element(2,lists:split(Index, AccIn)), Index+1, Count-1).
+
+myzip_longest(L,FillValue) ->
+    myzip_longest_tr(L, FillValue).
+
+myzip_longest_tr(L, FillValue) ->
+    IniAcc0 = array:to_list(array:new(lists:max([length(I) || I <-L ]),{default,[]})),
+    Results = [lists:reverse(I) || I <- lists:foldl(fun zipfunc_longest/2, IniAcc0, L )],
+    %%io:format("~p~n",[Results]),
+    Results.
+
+zipfunc_longest(Elem, AccIn) ->
+    zipfunc_longest_tr(Elem, AccIn, 1, length(AccIn)).
+
+zipfunc_longest_tr(_,AccIn,_Index,0) ->
+    AccIn;
+zipfunc_longest_tr([],AccIn,Index,Count) ->
+    zipfunc_longest_tr([],element(1,lists:split(Index-1,AccIn)) ++
+                                  [["-"|lists:nth(Index,AccIn)]] ++ element(2,lists:split(Index,AccIn)), Index+1, Count-1);
+zipfunc_longest_tr([H|T], AccIn, Index, Count) ->
+    zipfunc_longest_tr(T, element(1,lists:split(Index-1,AccIn)) ++
+                                  [[H|lists:nth(Index,AccIn)]] ++ element(2,lists:split(Index,AccIn)), Index+1, Count-1).
